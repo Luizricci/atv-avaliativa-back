@@ -12,13 +12,13 @@ const getEditoraById = async (id) => {
     return result.rows
 }
 
-const createEditora = async (name_editora) => {
-    const result = await pool.query (`INSERT INTO editoras (name_editora) VALUES ($1) RETURNING *`, [name_editora])
+const createEditora = async (name_editora, photo) => {
+    const result = await pool.query (`INSERT INTO editoras (name_editora, photo) VALUES ($1, $2) RETURNING *`, [name_editora, photo])
     return result.rows[0]
 }
 
-const editEditora = async (id, name_editora) => {
-    const result = await pool.query (`UPDATE editoras SET name_editora = $1 WHERE id = $2 RETURNING *`, [name_editora, id])
+const editEditora = async (id, name_editora, photo) => {
+    const result = await pool.query (`UPDATE editoras SET name_editora = $1, photo = $2 WHERE id = $3 RETURNING *`, [name_editora, photo, id])
     return result.rows[0]
 }
 

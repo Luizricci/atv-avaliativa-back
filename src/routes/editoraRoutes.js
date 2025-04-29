@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
+const upload = require("../config/upload.js");
 const editoraControllers = require('../controllers/editoraControllers');
 
 router.get('/', editoraControllers.getAllEditoras);
 router.get('/:id', editoraControllers.getById);
-router.post('/', editoraControllers.createEditora);
-router.put('/:id', editoraControllers.editPost);
-router.delete('/:id', editoraControllers.deletePost);
+router.post('/', upload.single("photo"), editoraControllers.createEditora);
+router.put('/:id', editoraControllers.editEditora);
+router.delete('/:id', editoraControllers.deleteEditora);
 
 
 

@@ -24,7 +24,8 @@ const getById = async (req, res) => {
 const createEditora = async (req, res) => {
     try {
         const { name_editora } = req.body;
-        const newEditora = await editoraModel.createEditora(name_editora);
+        const photo = req.file ? req.file.filename : null;
+        const newEditora = await editoraModel.createEditora(name_editora, photo);
         res.status(201).json(newEditora);
     } catch (error) {
         console.error(error);
@@ -32,7 +33,7 @@ const createEditora = async (req, res) => {
         
     }
 }
-const editPost = async (req, res) => {
+const editEditora = async (req, res) => {
     try {
         const { name_editora } = req.body;
         const editora = await editoraModel.editEditora(req.params.id, name_editora);
@@ -44,9 +45,9 @@ const editPost = async (req, res) => {
         res.status(500).json({ error: 'Erro ao editar editora.' });
     }
 }
-const deletePost = async (req, res) => {
+const deleteEditora = async (req, res) => {
     try {
-        const result = await editoraModel.deleteEditora(req.params.id);
+        const result = await editoraModel.deleteEditora(req.params.id, req.body);
         if (result.error) {
             return res.status(404).json(result);
         }
@@ -56,4 +57,4 @@ const deletePost = async (req, res) => {
     }
 }
 
-module.exports = { getAllEditoras, getById, createEditora, editPost, deletePost };
+module.exports = { getAllEditoras, getById, createEditora, editEditora, deleteEditora };
