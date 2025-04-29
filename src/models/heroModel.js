@@ -6,7 +6,7 @@ const getHeros = async (name) => {
         return result.rows;
     }
     else{
-        const result = await pool.query("SELECT * FROM usuarios WHERE name ILIKE $1", [`%${name}%`]);
+        const result = await pool.query("SELECT * FROM herois WHERE name ILIKE $1", [`%${name}%`]);
         return result.rows;
     }
 
